@@ -155,7 +155,6 @@ module EmberCLI
         check_addon!
         check_ember_cli_version!
         reset_build_error!
-        FileUtils.touch lockfile
         unless use_ember_fingerprints && params[:env] && params[:env] == :compile
           symlink_to_assets_root
           add_assets_to_precompile_list
