@@ -164,6 +164,7 @@ module EmberCLI
     end
 
     def copy_fingerprinted_assets
+      FileUtils.rm_rf "#{Rails.root}/public/assets/#{name}"
       FileUtils.mkdir_p "#{Rails.root}/public/assets/#{name}"
       FileUtils.cp_r Dir["#{dist_path.join("assets")}/*"], "#{Rails.root}/public/assets/#{name}/"
     end
@@ -171,7 +172,7 @@ module EmberCLI
     def fixup_asset_manifest
       # Add the app name to the file & asset paths (e.g. /frontend/vendor-12345.js)
       app_manifest_file = Dir["#{Rails.root.join('public/assets').join(name)}/manifest*.json"].first
-      app_manifest = JSON.parse( File.read( app_manifest_file ) )
+      app_manifest = JSON.parse(File.read(app_manifest_file))
 
       app_manifest["files"] = app_manifest["files"].inject({}) do |new_files, pair|
         file,info = pair
