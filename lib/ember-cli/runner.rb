@@ -13,7 +13,7 @@ module EmberCLI
 
       if EmberCLI.env.development?
         start_or_restart!
-      else
+      elsif EmberCLI.env.production?
         compile!
       end
 
